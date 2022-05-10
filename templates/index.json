@@ -1,5 +1,16 @@
 {
   "sections": {
+    "binary_creator": {
+      "type": "binary-creator",
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -45,17 +56,6 @@
         "mobile_content_alignment": "center",
         "stack_images_on_mobile": false,
         "show_text_below": false
-      }
-    },
-    "binary_creator": {
-      "type": "binary-creator",
-      "blocks": {},
-      "block_order": [],
-      "settings": {
-        "color_scheme": "background-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 0
       }
     },
     "rich_text": {
@@ -212,8 +212,8 @@
     }
   },
   "order": [
-    "image_banner",
     "binary_creator",
+    "image_banner",
     "rich_text",
     "featured_collection",
     "collage",
