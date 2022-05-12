@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{{ 'section-binary-creator.css' | asset_url }}" media="print" onload="this.media='all'">
 <script type='module' src="{{ 'binary-creator.js' | asset_url }}" defer="defer"></script>
 
-<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.tailwindcss.com" async="true" ></script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
@@ -10,36 +10,40 @@
   rel="stylesheet"
 />
 
-<div class="binary-section container mx-auto flex flex-col my-8" data-controller='binary-creator'>
-    <input
-      data-action='binary-creator#compile'
-      type="text"
-      id="words"
-      name="words"
-      required
-      size="10"
-      class="my-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-      placeholder='What would you like to compile?'
-    />
+
+<div class="binary-section container mx-auto flex flex-col my-8" data-controller='binary-creator binary-form'>
+  <label for='words'>What would you like to compile?<label>
+  <input
+    data-action='binary-creator#compile binary-form#setText'
+    type="text"
+    id="words"
+    name="words"
+    required
+    size="10"
+    class="my-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+  />
   <div class='flex flex-row'>
-    <input
-      data-action='change->binary-creator#setBackgroundColor'
-      type="color"
-      id="background"
-      name="background"
-      required
-      size="10"
-      class="basis-1/2 mx-1 md:w-1/2 my-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-    />
-    <input
-      data-action='change->binary-creator#setFontColor'
-      type="color"
-      id="font-color"
-      name="font-color"
-      required
-      size="10"
-      class="basis-1/2 my-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-    />
+    <div class='basis-1/2'>
+      <label>Shirt Color<label>
+      <div class='grid grid-rows-4 grid-flow-col'>
+        {% for i in (1..51) %}
+          <button data-binary-form-target="color" data-action='binary-form#setBackgroundColor' class="border w-9 h-9 rounded-full border-2 border-black hover:border-blue-400"> </button>
+        {% endfor %}
+      </div>
+    </div>
+    <div class='basis-1/2'>
+      <label>Font Color<label>
+      <input
+        data-action='change->binary-form#setFontColor'
+        type="color"
+        id="font-color"
+        name="font-color"
+        required
+        size="10"
+        class="basis-1/2 my-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+      />
+    </div>
   </div>
-  <div id="tee-container" data-binary-creator-target='compiled'></div>
+  <button class="px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-full shadow-sm" data-action='binary-form#createPNG'>Hack the Mainframe!</button>
+  <div id="tee-container" data-binary-creator-target='compiled' data-binary-form-target='binary'></div>
 </div>
